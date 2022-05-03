@@ -6,25 +6,34 @@ const blogSchema = new mongoose.Schema({
 
     title: {
         type: String,
-        required: true
+        required: true,
+        trim:true
     },
     body: {
         type: String,
-        required: true
+        required: true,
+        trim:true
     },
     authorId: {
         type: ObjectId,         
-        ref: 'project1_author' 
+        ref: 'Author' 
     },
-    tags: [String], 
+    tags:[{type: String,
+        trim:true
+    }],
     category: {
         type: String,
-        required: true
+        required: true,
+        trim:true
     },
-    subcategory: [String],
+    subcategory:[{ 
+        type:String,
+        trim:true
+    }],
 
     deletedAt: {
-        type: String,
+        type:String,
+        default:null
       },
     
     isDeleted: {
@@ -32,10 +41,10 @@ const blogSchema = new mongoose.Schema({
         default: false
     },
     publishedAt: {
-        type: String,
+        type:String,
+        default:null
       },
-   
-    isPublished: {
+   isPublished: {
         type: Boolean,
         default: false
     }
