@@ -4,7 +4,7 @@ const CollegeModel = require("../controllers/college")
 
 router.post("/functionup/colleges", CollegeModel.createCollege)
 
-
+router.get("/functionup/collegeDetails", CollegeModel.getColleges)
 
 
 
