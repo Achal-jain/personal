@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect("mongodb+srv://pattamu:iKHwECgQCaYNVpge@sandeepcluster.9rzkh.mongodb.net/rishav305?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://nas:nas1234@cluster0.fci9p.mongodb.net/group28Database", {
     useNewUrlParser: true
 })
 
@@ -21,5 +21,5 @@ app.use('/', route);
 
 
 app.listen(process.env.PORT || 3000, function () {
-    console.log('Express app running on port' + (process.env.PORT || 3000))
+    console.log('Express app running on port ' + (process.env.PORT || 3000))
 });
