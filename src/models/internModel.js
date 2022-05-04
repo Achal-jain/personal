@@ -14,12 +14,17 @@ const internSchema = new mongoose.Schema({
         trim:true,
         lowercase:true,
         unique:true, 
-        required:'Email Address is Required'
+        required: [true, 'Email Address is Required']
     },
       mobile: {
           type:Number,
           required:true,
-           unique:true
+           unique:true,
+           validate:{
+               validator:function(mobile){
+                   return /^\d{10}$/.test(mobile)
+               },message:'please fill a valid Mobile Number',isAsync:false
+           } 
     },
       collegeId: {
            type:ObjectId, 

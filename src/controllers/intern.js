@@ -1,12 +1,11 @@
 const mongoose = require('mongoose')
 const internModel= require("../models/internModel")
 const collegeModel= require("../models/collegeModel")
-
+const validateEmail = require('email-validator');
 const isValidObjectId = (ObjectId) => {
     return mongoose.Types.ObjectId.isValid(ObjectId);
 };
 
-let validString = /\d/;
 
 const createIntern = async (req, res) => {
   try {
@@ -20,11 +19,15 @@ const createIntern = async (req, res) => {
     if(!intern.collegeId) return res.status(400).send({ status: false, msg: "College ID is required" });
     if(!intern.mobile) return res.status(400).send({ status: false, msg: "Intern Mobile Number is required" });
     
+    let validString = /\d/;
     if(validString.test(intern.name))
      return res.status(400).send({ status: false, msg: "Data must not contains numbers"});
 
     if(!isValidObjectId(intern.collegeId))
      return res.status(404).send({ status: false, msg: "Enter a valid college Id" });
+
+    if(!validateEmail.validate(req.body.email))
+     return res.status(400).send({ status: false, msg: "Enter a valid email" })
     
     let getCollegeData = await collegeModel.findById(intern.collegeId);
     if(!getCollegeData)
