@@ -3,7 +3,7 @@ const CollegeModel = require("../models/collegeModel")
 
 const createCollege = async function(req, res){
     try{
-        let data = req.body
+        let data= req.body
         let created = await CollegeModel.create(data)
         return res.status(201).send({status : true, data : created})
     }catch(err){

@@ -26,9 +26,12 @@ const createIntern = async (req, res) => {
     if(!isValidObjectId(intern.collegeId))
      return res.status(404).send({ status: false, msg: "Enter a valid college Id" });
 
+     let uniqueEmail = await internModel.findOne({email:internModel.email});
+     if(uniqueEmail) {res.status(400).send({ status: false, msg: 'Email already exist'})}
+
     if(!validateEmail.validate(req.body.email))
      return res.status(400).send({ status: false, msg: "Enter a valid email" })
-    
+
     let getCollegeData = await collegeModel.findById(intern.collegeId);
     if(!getCollegeData)
      return res.status(404).send({ status: false, msg: "No such college exist" });
