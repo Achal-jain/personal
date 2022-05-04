@@ -14,7 +14,7 @@ const internSchema = new mongoose.Schema({
         trim:true,
         lowercase:true,
         unique:true, 
-        required:'Email Address is Required'
+        required: [true, 'Email Address is Required']
     },
       mobile: {
           type:Number,
