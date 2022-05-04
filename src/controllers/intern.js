@@ -21,7 +21,7 @@ const createIntern = async (req, res) => {
     
     let validString = /\d/;
     if(validString.test(intern.name))
-     return res.status(400).send({ status: false, msg: "Data must not contains numbers"});
+     return res.status(400).send({ status: false, msg: "Name must not contains numbers"});
 
     if(!isValidObjectId(intern.collegeId))
      return res.status(404).send({ status: false, msg: "Enter a valid college Id" });
