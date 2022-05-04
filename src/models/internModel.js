@@ -20,7 +20,11 @@ const internSchema = new mongoose.Schema({
           type:Number,
           required:true,
            unique:true,
-           minlength:10 
+           validate:{
+               validator:function(mobile){
+                   return /^\d{10}$/.test(mobile)
+               },message:'please fill a valid Mobile Number',isAsync:false
+           } 
     },
       collegeId: {
            type:ObjectId, 
