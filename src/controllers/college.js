@@ -3,7 +3,7 @@ const InternModel = require("../models/internModel")
 
 const createCollege = async function(req, res){
     try{
-        let data = req.body
+        let data= req.body
         let created = await CollegeModel.create(data)
         return res.status(201).send({status : true, data : created})
     }catch(err){
@@ -25,6 +25,7 @@ const getColleges = async function(req, res){
         if(part2.length == 0) return res.status(404).send({status : false, msg : "No interns at this particular moment"})
         let temp = part1.toJSON()
         temp["interests"] = [...part2]
+        
 
         return res.status(200).send({status : true, data : temp})
 
