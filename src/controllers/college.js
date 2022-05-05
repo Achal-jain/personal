@@ -1,5 +1,3 @@
-const mongoose = require("mongoose")
-const { find } = require("../models/collegeModel")
 const CollegeModel = require("../models/collegeModel")
 const InternModel = require("../models/internModel")
 
@@ -15,7 +13,9 @@ const createCollege = async function(req, res){
 
 const getColleges = async function(req, res){
     try{
-        if(Object.keys(req.query).length == 0) return res.status(400).send({status : false, msg : "Add college name to find"})
+        let body = req.query
+        if(Object.keys(body).length == 0) return res.status(400).send({status : false, msg : "Add college name to find"})
+        if(Object.keys(body).indexOf("collegeName") == -1) return res.status(400).send({status : false, msg : "Pls use collegeName as query param"})
         let cname = req.query.collegeName
         let cId = await CollegeModel.findOne({name : cname}).select({_id : 1})
         if(!cId) return res.status(404).send({status : false, msg : "Sorry, no college with particular name exists"})
