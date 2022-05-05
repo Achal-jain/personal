@@ -16,9 +16,14 @@ const createIntern = async (req, res) => {
 
     if(!intern.name) return res.status(400).send({ status: false, msg: "Intern name is required" });
     if(!intern.email) return res.status(400).send({ status: false, msg: "Intern Email is required" });
-    if(!intern.collegeId) return res.status(400).send({ status: false, msg: "College ID is required" });
+    if(!intern.collegeName) return res.status(400).send({ status: false, msg: "College Name is required" });
     if(!intern.mobile) return res.status(400).send({ status: false, msg: "Intern Mobile Number is required" });
     
+    let cId= await collegeModel.findOne({name : intern.collegeName}).select({_id:1})
+    console.log(cId)
+    cId=cId._id
+    req.body.collegeId=cId
+
     let validString = /\d/;
     if(validString.test(intern.name))
      return res.status(400).send({ status: false, msg: "Name must not contains numbers"});
@@ -36,7 +41,7 @@ const createIntern = async (req, res) => {
     if(!getCollegeData)
      return res.status(404).send({ status: false, msg: "No such college exist" });
 
-    let showInternData = await internModel.create(intern);
+     let showInternData = await internModel.create(intern);
     res.status(201).send({ status: true, data: showInternData });
   } catch (err) {
     res.status(500).send({ status: false, error: err.message });
