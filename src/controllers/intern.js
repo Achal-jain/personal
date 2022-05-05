@@ -16,12 +16,14 @@ const createIntern = async (req, res) => {
     if (!intern.collegeName) return res.status(400).send({ status: false, msg: "College Name is required" });
     if (!intern.mobile) return res.status(400).send({ status: false, msg: "Intern Mobile Number is required" });
 
+    let cId = await collegeModel.findOne({name : intern.collegeName}).select({_id : 1})
+    cId = cId._id.toString()
+    intern.collegeId = cId
 
 
     let validString = /\d/;
     if (validString.test(intern.name))
       return res.status(400).send({ status: false, msg: "Name must not contains numbers" });
-
 
 
     let uniqueEmail = await internModel.findOne({ email: internModel.email });
