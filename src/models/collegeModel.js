@@ -8,4 +8,4 @@ const collegeModel = new mongoose.Schema({
     isDeleted : {type : Boolean, default : false}
 }, {timestamps : true})
 
-module.exports = mongoose.model("College1", collegeModel)
+module.exports = mongoose.model("College", collegeModel)
