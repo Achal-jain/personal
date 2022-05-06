@@ -26,9 +26,7 @@ const createIntern = async (req, res) => {
       return res.status(400).send({ status: false, msg: "Name must not contains numbers" });
 
 
-    let uniqueEmail = await internModel.findOne({ email: internModel.email });
-    if (uniqueEmail) { res.status(400).send({ status: false, msg: 'Email already exist' }) }
-
+  
     if (!validateEmail.validate(req.body.email))
       return res.status(400).send({ status: false, msg: "Enter a valid email" })
 

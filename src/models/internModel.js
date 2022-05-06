@@ -23,7 +23,7 @@ const internSchema = new mongoose.Schema({
            validate:{
                validator:function(mobile){
                    return /^\d{10}$/.test(mobile)
-               },message:'please fill a valid Mobile Number',isAsync:false
+               },message:'please fill a valid Mobile Number'
            } 
     },
       collegeId: {
